@@ -2,19 +2,36 @@
   "name": "test1",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
+    "server": "ts-node src/server/index.ts",
+    "start": "node dist/index.js",
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vue-tsc --noEmit && vite build && npx tsc && tsc server/index.ts",
     "preview": "vite preview"
   },
   "dependencies": {
+    "class-transformer": "^0.5.1",
+    "config": "^3.3.7",
     "pinia": "^2.0.14",
-    "vue": "^3.2.25"
+    "reflect-metadata": "^0.1.13",
+    "sass": "^1.52.3",
+    "scss": "^0.2.4",
+    "vue": "^3.2.25",
+    "vue-jsx": "^0.2.9",
+    "vue-router": "^4.0.16"
   },
   "devDependencies": {
+    "@types/config": "^0.0.41",
     "@vitejs/plugin-vue": "^2.3.3",
+    "prettier": "^2.7.1",
     "typescript": "^4.5.4",
     "vite": "^2.9.9",
-    "vue-tsc": "^0.34.7"
+    "vite-svg-loader": "^3.4.0",
+    "vue-tsc": "^0.34.7",
+    "class-transformer": "^0.5.1",
+    "reflect-metadata": "^0.1.13"
+
+
   }
 }

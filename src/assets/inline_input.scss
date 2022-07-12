@@ -1,0 +1,18 @@
+input{
+    background-color: transparent;
+
+border: none;
+border-bottom: 1px solid gray;
+font-family: Avenir, Helvetica, Arial, sans-serif;
+font-size: inherit;
+box-sizing: border-box;
+
+// padding: 0;
+// margin: 0;
+background-clip: padding-box;
+}
+input:focus{
+outline: none;
+transition: all .2s ease-in;
+border-color: lightskyblue;
+}

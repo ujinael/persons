@@ -1,0 +1,22 @@
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+tr{
+    height: 2.2rem;
+}
+tr:hover{
+    background-color: aliceblue;
+}
+th,td{
+    /* text-align: left;    */
+     border-bottom: 1px solid gray;
+
+}
+thead{
+    background-color: rgb(212, 227, 222);
+    position: sticky;
+    height: 2.5rem;
+    top: 0px;
+    left: 0px;
+}

@@ -1,0 +1,15 @@
+form{
+    background-color: whitesmoke;
+    display: grid;
+    grid-auto-flow: row;
+    gap:1rem;
+    box-sizing: border-box;
+    padding: 1rem;
+    border-radius: var(--common_border_radius);
+    justify-items: right;
+
+}
+.actions{
+    display: flex;
+    gap: .5rem;
+}

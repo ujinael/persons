@@ -1,7 +1,13 @@
 {
+  
+  "transpileOnly": true,
   "compilerOptions": {
+    "experimentalDecorators":true,
+    "emitDecoratorMetadata": true,
+    "noEmit": true,
     "target": "esnext",
     "useDefineForClassFields": true,
+    "allowSyntheticDefaultImports": true,
     "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
@@ -11,8 +17,11 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": ["src/server/**/*.ts",
+    "src/server/**/*.d.ts"
+    ,"src/**/*.ts", "src/**/*.d.ts"
+    , "src/**/*.tsx", "src/**/*.vue", "src/directives/VPhonemask.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

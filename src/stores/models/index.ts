@@ -1,1 +1,6 @@
 export * from './Person'
+export * from './Login'
+export * from './Role'
+export * from './Account'
+export * from './Employer'
+export * from './Phone'
