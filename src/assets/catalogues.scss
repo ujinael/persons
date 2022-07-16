@@ -4,16 +4,20 @@
 ul{
     list-style: none;
 }
-li{
+.catalog_item{
     text-align: left; 
-       padding:.25rem 0;
+    padding:.25rem 0;
     border-bottom: 1px solid lightgray;
 }
-li:hover{
+.catalog_item:hover{
     cursor: pointer;
     background-color: rgb(242, 247, 250);
 }
 .description{
 font-size: small;
 color: gray;
+}
+.additional{
+    font-size: small;
+    color: dimgray; 
 }

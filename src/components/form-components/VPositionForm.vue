@@ -18,16 +18,17 @@ import { storeToRefs } from 'pinia';
 import { useDepartmentsStore } from '../../stores/modules/departments/useDepartmentsStore';
 import VInput from '../ui-components/VInput.vue';
 import VButton from '../ui-components/VButton.vue';
+import { usePositionsStore } from '../../stores/modules/positions/usePositionsStore';
 const emit = defineEmits(['close'])
-const store = useDepartmentsStore()
-const  {department} = storeToRefs(store)
+const store = usePositionsStore()
+const  {position} = storeToRefs(store)
 const onSave = ()=>{
-    if(department.value)
+    if(position.value)
     {
-    if(department.value.id){        
+    if(position.value.id){        
     }
     else{
-        store.saveDepartment().then(()=>{
+        store.savePosition().then(()=>{
             emit('close')
         })
     }

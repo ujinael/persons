@@ -123,18 +123,19 @@ async update<Update,Entity>(entity: Update,constructor:any,query?:Query):Promise
 async upload<F extends FormData,Entity>(entity: F,constructor:any,query?:Query):Promise<Entity> {
   let url = new URL(this.rootPath + this.path)
 if(query)
-url.searchParams.append(query.key, query.value)
+  url.searchParams.append(query.key, query.value)
+  const myHeaders = new Headers();
+myHeaders.append('Content-Type', 'multipart/form-data');
     let request = new Request(url.toString(),{
-     headers: {
-      'Accept':'application/json;charset=utf-8',
-      'Origin': '*',
-      'Access-Control-Max-Age':'600',
-      'Content-Type': 'multipart/form-data',
-     },
+      // headers:myHeaders,
+    //   {
+    //   // 'Origin': '*',
+    //   'Content-Type': 'multipart/form-data',
+    //  },
      mode:'cors',
      credentials:'include',
       method: 'POST',
-     body: JSON.stringify(entity)
+      body: entity
    }
    );
 const response:string = await fetch(request)

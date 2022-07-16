@@ -7,6 +7,7 @@ export class Department {
     public title: string,
     public description: string,
     public id?: string,
+    public positions?:string[]
   ){ }
 
 toCreate():CreateDepartmentDto{
