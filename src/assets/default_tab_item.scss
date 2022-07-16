@@ -1,0 +1,20 @@
+.tab_bar{
+gap:2rem;
+}
+.tab{
+    color: rgb(177, 174, 174);
+}
+.tab:hover:not(.active){
+color: gray;
+transition: all .2s ease-in;
+}
+.active {
+color: lightskyblue;
+display: grid;
+}
+.active::after{
+    content: '.';
+    width: 100%;
+    height: 5px;
+    border-bottom: 2px solid lightskyblue;
+}

@@ -1,10 +1,10 @@
 <template>
-<form @submit.prevent="onSave" v-if="department">
+<form @submit.prevent="onSave" v-if="position">
  <label>Название:
-    <VInput v-model="department.title" placeholder="введите название" required/>
+    <VInput v-model="position.title" placeholder="введите название" required/>
  </label>   
  <label>Описание:
-    <VInput v-model="department.description" placeholder="введите описание" required/>
+    <VInput v-model="position.description" placeholder="введите описание" required/>
     </label>   
     <div class="actions">
         <VButton :v-style="'accept'" type="submit" rounded>Сохранить</VButton>
@@ -15,12 +15,13 @@
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { useDepartmentsStore } from '../../stores/modules/departments/useDepartmentsStore';
 import VInput from '../ui-components/VInput.vue';
 import VButton from '../ui-components/VButton.vue';
 import { usePositionsStore } from '../../stores/modules/positions/usePositionsStore';
+import { useDepartmentsStore } from '../../stores/modules/departments/useDepartmentsStore';
 const emit = defineEmits(['close'])
 const store = usePositionsStore()
+const departmentStore = useDepartmentsStore()
 const  {position} = storeToRefs(store)
 const onSave = ()=>{
     if(position.value)
@@ -28,8 +29,10 @@ const onSave = ()=>{
     if(position.value.id){        
     }
     else{
-        store.savePosition().then(()=>{
-            emit('close')
+    
+        store.savePosition(departmentStore.department?.id!).then(p=>{
+          departmentStore.department?.positions?.unshift(p)
+          emit('close')
         })
     }
     }

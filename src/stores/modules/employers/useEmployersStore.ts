@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { Account, Gender, Person, Phone } from '../../models';
 import { Employer } from '../../models/Employer';
+import { Position } from '../../models/position/Position';
 import {  Api } from '../../server.api';
 import { usePersonsStore } from '../persons/usePersonsStore';
 import { CreateAccountDTO } from './dto/CreateAccountDTO';
@@ -72,6 +73,19 @@ const {login,password,roles} = account
 return r
         })
     },
+    async setPosition(positionID: string) {
+      this.loading = true
+      await Api.shared().child('employers',`${this.employer.id}/set_position`)
+        .update<{},Position>({}, Position, { key: 'positionID', value: positionID })
+        .then(p => {
+          this.employer.positions.unshift(p)
+          this.loading = false
+
+      })
+    },
+    async deletePosition(positionID:string) {
+      
+    }
   }
 
 })

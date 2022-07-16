@@ -10,7 +10,10 @@ ul{
     border-bottom: 1px solid lightgray;
 }
 .catalog_item:hover{
-    cursor: pointer;
+  
+}
+.selectable:hover{
+      cursor: pointer;
     background-color: rgb(242, 247, 250);
 }
 .description{

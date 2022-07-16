@@ -39,12 +39,13 @@ export const usePositionsStore = defineStore('positions', {
       else throw new Error("Дожность не задана");
       
       this.loading = true
-      await Api.shared().child('positions')
+    return  await Api.shared().child('positions')
       .post<CreatePositionDto,Position>(this.position!.toCreate(),Position)
       .then(p=>{
         this.position = p
         this.positions.unshift(p)
-       this.loading = false
+        this.loading = false
+        return p
       })
     },
     async uploadJobDescription(file: any,id:string) {
@@ -52,16 +53,12 @@ export const usePositionsStore = defineStore('positions', {
       formData.append('jobDescription', file)      
       this.loading = true
       await Api.shared().child('positions',`${id}/create_job_description`)
-        .upload<FormData,{id:string,jobDescription:string}>(formData, Object).then(r => {
-        console.log(r.jobDescription);
-        
+        .upload<FormData,{id:string,jobDescription:string}>(formData, Object).then(r => {        
           const pos = this.positions.find(p => p.id === r.id)
-          console.log(pos);
-          
+          this.loading = false
+
           if (pos) {
             pos.jobDescription = r.jobDescription
-            // this.positions = this.positions.filter(p => p.id !== pos.id)
-            // this.positions = [...this.positions,pos]
           }
           })
     }

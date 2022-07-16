@@ -69,20 +69,9 @@ grid-area: 1/1/2/2;
 .description {
 grid-area: 2/1/3/2;
 }
+@import '../../assets/row_actions.scss';
 .actions{
- grid-area: 3/1/4/2; 
- display: flex;
- gap:.2rem;
-}
-.action{
-color: blue;
-font-size: small;
-opacity: .7;
-}
-.action:hover{
-    cursor: pointer;
-opacity: 1;
-}
+    grid-area: 3/1/4/2; }
 .additional {
     grid-area: 1/2/4/3;
     justify-self: right;

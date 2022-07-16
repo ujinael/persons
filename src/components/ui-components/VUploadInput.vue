@@ -1,7 +1,15 @@
 <template>
-<input ref="input" type="file" @change="onChange">
+<span class="uploader">
+  <input ref="input" type="file" @change="onChange">
+<span @click="input?.click()">
+  <slot>
+    <button  ></button>
+<label for="button">Выбрать файл</label>
+  </slot>
+</span>
+</span>
 
-<button @click="input?.click()" ></button><label for="button">Выбрать файл</label>
+
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
@@ -18,7 +26,12 @@ emit('select',file)
 }
 </script>
 <style scoped lang="scss">
+.uploader{
+  // height: 5px;
+  padding: 0;
+}
 input{
+
     display: none;
 }
 button{

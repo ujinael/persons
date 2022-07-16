@@ -3,6 +3,7 @@
 <VPersonPageComponent id="person"/>
 <VAccountPageComponent id="account"/>
 <VContactPageComponent v-if="store.employer.person" id="contacts"/>
+<VTabPageComponent id="tabs"/>
 </div>
 </template>
 <script setup lang="ts">
@@ -12,6 +13,7 @@ import { useRoute } from 'vue-router';
 import { onMounted } from 'vue';
 import { useEmployersStore,useAccountsStore } from '../../stores/modules';
 import VContactPageComponent from './components/VContactPageComponent.vue';
+import VTabPageComponent from './components/tabs/VTabPageComponent.vue';
 const route = useRoute()
 const store = useEmployersStore()
 const accountStore = useAccountsStore()
@@ -47,5 +49,8 @@ grid-row: 1/2;
 grid-column: 3/4;
 grid-row: 1/2;
 // grid-area: 2/2/3/3;
+}
+#tabs{
+ grid-area: 3/1/4/4;   
 }
 </style>

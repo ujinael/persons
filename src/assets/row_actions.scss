@@ -1,0 +1,14 @@
+.actions{
+    margin:.2rem 0;
+    display: flex;
+    gap:.4rem;
+   }
+   .action{
+   color: blue;
+   font-size: small;
+   opacity: .7;
+   }
+   .action:hover{
+       cursor: pointer;
+   opacity: 1;
+   }
