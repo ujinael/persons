@@ -78,13 +78,22 @@ return r
       await Api.shared().child('employers',`${this.employer.id}/set_position`)
         .update<{},Position>({}, Position, { key: 'positionID', value: positionID })
         .then(p => {
+          console.log(p);
+          
           this.employer.positions.unshift(p)
           this.loading = false
 
       })
     },
     async deletePosition(positionID:string) {
-      
+      this.loading = true
+      await Api.shared().child('employers',`${this.employer.id}/unset_position`)
+        .update<{},string>({}, Position, { key: 'positionID', value: positionID })
+        .then(p => {
+          this.employer.positions = this.employer.positions.filter(p=>p.id!=positionID)
+          this.loading = false
+
+      })
     }
   }
 

@@ -7,7 +7,7 @@
 </div>
 <div class="main">
   
-  <VTabBar :align="'start'">
+  <VTabBar class="tabbar" :align="'start'">
     <VTabBarItem v-model="selectedView" title="Должности" value="positions"/>
     <VTabBarItem  v-model="selectedView" title="Паспорта" value="passports"/>
     <VTabBarItem  v-model="selectedView" title="Адреса" value="adresses"/>
@@ -25,12 +25,15 @@ import { ref } from 'vue';
 import VTabPositionsComponent from './VTabPositionsComponent.vue'
 import VTabBar from '../../../../components/ui-components/VTabBar.vue';
 import VTabBarItem from '../../../../components/ui-components/VTabBarItem.vue';
+import VTabPassportsComponent from './VTabPassportsComponent.vue';
+import VTabAddressesComponent from './VTabAddressesComponent.vue';
+import VTabDocumentsComponent from './VTabDocumentsComponent.vue';
 const selectedView = ref<keyof typeof tabs>('positions')
 const tabs = {
   positions:VTabPositionsComponent,
-    passports:VTabPositionsComponent,
-      adresses:VTabPositionsComponent,
-        docs:VTabPositionsComponent
+    passports:VTabPassportsComponent,
+      addresses:VTabAddressesComponent,
+        docs:VTabDocumentsComponent
 
 
 
@@ -42,5 +45,8 @@ const tabs = {
 @import '../../../../assets/default_tab_item.scss';
 .page_component{
   height: 25rem;
+}
+.tabbar{
+  margin-bottom: 1rem;
 }
 </style>

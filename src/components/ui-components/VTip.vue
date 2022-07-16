@@ -1,9 +1,17 @@
 <template>
-<div class="tip" :class="classes">
- <span>
+<div class="tip" >
+ <span 
+  @click="emit('click',$event)"
+  :class="classes">
     {{title}}
     <CloseIco @click="emit('onDeleteClick')" v-if="remove" class="ico"/>
  </span>   
+ <transition name="fade">
+ <div class="dropdown" v-if="value">
+  <slot name="dropdown"
+  ></slot>
+ </div>
+ </transition>
 </div>
 </template>
 <script setup lang="ts">
@@ -13,8 +21,14 @@ const props = defineProps<{
 title:string
 remove?:boolean
 type?:'default'|'add'
+modelValue?:boolean
 }>()
-const emit = defineEmits(['onDeleteClick'])
+
+const value = computed<boolean|undefined>({
+get(){return props.modelValue},
+set(v){emit('update:modelValue',v)}
+})
+const emit = defineEmits(['onDeleteClick','update:modelValue','click'])
 const classes = computed(()=>{
   return {
     add:props.type === 'add',
@@ -27,18 +41,26 @@ span{
     display: flex;
     gap: .2rem;
 }
+span:hover{
+cursor: pointer;
+}
 .tip{
-  box-sizing: border-box;
+box-sizing: border-box;
 font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-font-size: 14px;
+font-size: small;
 background-color: white;
 box-shadow: .1rem .1rem .2rem lightgray;
 border-radius: var(--common_border_radius);
-padding: .2rem .6rem;
-display: inline;
+display: flex;
 align-self: center;
 justify-self: left;
+position: relative;
 
+}
+span{
+  padding: .2rem .6rem;
+border-radius: inherit;
+pointer-events: auto;
 }
 .ico{
   width: 12px;
@@ -63,7 +85,6 @@ brightness(60%)
     background-color: var(--accept_color);
     border-color: var(--accept_color);
     color: whitesmoke;
-    cursor: pointer;
 }
 .add:nth-child(1){
     stroke:1px whitesmoke;
@@ -73,4 +94,15 @@ brightness(60%)
     background-color: var(--accept_invert_color);
     color: var(--accept_color);
 }
+.dropdown{
+  position: absolute;
+  top: 1.3rem;
+  left: 0;
+  border-radius: var(--common_border_radius);
+  min-height: 100%;
+  min-width: 100%;
+  border: 1px solid lightgray;
+  background-color: white;
+}
+@import '../../assets/show-animation.css';
 </style>

@@ -1,14 +1,17 @@
 <template>
-<!-- <div class="backdrop" v-if="dropdownVisible"
+<div class="backdrop" v-if="dropdownVisible"
 
 @click="showDropdown">
 
-</div> -->
+</div>
 <div class="select" tabindex="0"
-@blur="onBlur" @click="showDropdown">
+ @click="showDropdown">
 <div class="select_value">
-  <div class="select_label">
+  <div class="select_label" v-if="value">
       {{label?label: value}}
+  </div>
+  <div class="select_label" v-else>
+    выбрать
   </div>
 <div class="icon_container">
 <ArrowIco class="ico" :class="{open:dropdownVisible}"/>
@@ -37,16 +40,17 @@ interface Option{
   value:Object
 }
 const props = defineProps<{
-modelValue:string|Object,
+modelValue?:string|Object|null,
 options:string[]|Option[]
 label?:string
 }>()
 const select = (option:Option|string)=>{
   if(typeof option === 'string'){value.value = option}
 else value.value = option.value
+emit('select',option)
 }
-const emit = defineEmits(['update:modelValue'])
-const value = computed<string|Object>({
+const emit = defineEmits(['update:modelValue','select'])
+const value = computed<string|Object|undefined|null>({
 get(){return props.modelValue},
 set(v){emit('update:modelValue',v)}
 })
@@ -98,6 +102,7 @@ justify-content: space-between;
 display: flex;
 flex-direction: column;
 justify-content: center;
+cursor: default;
 }
 .icon_container{
   height: var(--common_input_height);
@@ -144,6 +149,7 @@ flex-direction: column;
 justify-content: center;
 }
 li:hover{
+  cursor:default;
   background-color: rgb(0, 0, 0,.5);;
 }
 </style>

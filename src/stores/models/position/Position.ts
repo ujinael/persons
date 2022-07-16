@@ -8,6 +8,7 @@ id?:string
     public description: string,
     public departmentID?:string,
     public jobDescription?: string,
+    public departmentTitle?:string
     ) { }
 toCreate():CreatePositionDto{
 return {...this,departmentID:this.departmentID!}
