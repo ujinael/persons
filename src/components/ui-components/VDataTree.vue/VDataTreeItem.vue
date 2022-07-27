@@ -1,59 +1,109 @@
 <template>
 <li>
-    <h3 
-    :class="{full:children,open:open}"
-     @click="toggleElement">{{label}}</h3>
-    <ul v-if="children && open">
- <VDataTreeItem v-for="item in children"
-:children = item.children
-:label = "item.label"
-:id="item.id"
+    <div class="title" >
+         <ArrowIco class="icon" :class="{forward_arrow:!open,down_arrow:open}"/>
+           <h3 @click="clickOnNode(node)"
+    :class="{full:node.children,open:open}"
+     > 
+      <input v-if="node.edit"
+ v-focus
+@blur.stop="saveRedactedNode" 
+ type="text" v-model="node.name"/>
+    <span v-else>{{node.name}}</span> 
+     </h3> 
+    </div>
+<Transition name="fade">
+    <ul v-if="node.children && open">
+ <VDataTreeItem v-for="item in node.children"
+
+:node = item
+@save-category="emit('saveCategory',$event)"
+@select-node="emit('selectNode',$event)"
+@lazy-load="emit('lazyLoad',$event)"
+@select-item="emit('selectItem',$event)"
 />
+
+<section v-if="node.items.length">
+<li v-for="(item, index) in node.items" :key="index">
+<span class="item noselect" @dblclick="emit('selectItem',item)">{{item.title}}</span>
+</li>
+</section>
     </ul>
+    </Transition>
 </li>
 </template>
 <script setup lang="ts">
 import { useToggle } from '../../../compositon';
-import { DataTree } from './VDataTree.vue';
-
+import {DataTree,Data} from '../../../stores/models'
+import ArrowIco from '../../../assets/right-arrow-svgrepo-com.svg'
 const props = defineProps<{
-id:string
-children?:DataTree[]
-label:string
+node:DataTree<Data>
 }>()
+const emit = defineEmits(['saveCategory','selectNode','lazyLoad','selectItem'])
+const clickOnNode = (node?:DataTree<Data>)=>{
+    if(!open.value){
+    emit('lazyLoad',node)
+    }
+    emit('selectNode',props.node)
+    toggleElement()
+}
 const {elementVisible:open,toggleElement} = useToggle()
+
+const saveRedactedNode = ()=>{
+    if(props.node.name)
+    emit('saveCategory',props.node)    
+    props.node.edit = false
+}
 </script>
 <style scoped lang="scss">
 h3{
     cursor: pointer;
 }
-h3:hover{
+
+.title:hover{
     color: lightskyblue;
+    fill: lightskyblue;
+}
+
+.icon{
+        cursor: pointer;
+    height: 1rem;
+    width: auto;
+}
+.forward_arrow{
+    transform: rotate(0deg);
+    transition: transform .2s ease-in-out;
+}
+.down_arrow{
+    transform: rotate(90deg);
+    transition: transform .2s ease-in-out;
 }
 li{
-    padding: 0 .5rem;
+    padding: 0 1.5rem;
 }
 ul{
     list-style-type: none;
 }
-.full::after{
-    background-image: url('../../../assets/diary.svg');
-    background-repeat: no-repeat;
-//   content: url('../../../assets/diary.svg');
-    height:15px;
-    width: 15px;
-    background-color: transparent;
-    border: 1px solid gray;
-    // position: absolute;
-        // content: '+';
+
+
+.title{
+    display: grid;
+    width: fit-content;
+    grid-auto-flow: column;
+    align-items: center;
+    gap:.4rem;
 
 }
-.open.full::after{
-      height:10px;
-    width: 10px;
-    //   content: url('../../../assets/diary.svg');
-
-    // content: '-';
-    // position: absolute;
+.item{
+color: gray;
 }
+.item:hover{
+    cursor: pointer;
+    color: black;
+}
+@import '../../../assets/row_actions.scss';
+@import '../../../assets/show-animation.css';
+@import '../../../assets/inline_input.scss';
+@import '../../../assets/no_select.scss';
+
 </style>

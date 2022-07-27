@@ -44,6 +44,30 @@
     background-color: var(--default_invert_color);
     color: var(--default_color);
 }
+button:active{
+    /* color:black; */
+    /* transform: scale(99%); */
+    animation: activeAnimation .25s ease-in-out;
+    /* animation-iteration-count: 1; */
+    animation-direction:alternate;
+    }
+@keyframes activeAnimation {
+    0%{
+        background: linear-gradient(to right, var(--default_color), 20%,var(--default_invert_color));
+    }
+    /* 25%{
+        background: linear-gradient(to right, var(--default_color) ,80% , var(--default_invert_color));
+    } */
+    50%{
+        background: linear-gradient(to right,var(--default_invert_color), 30%, var(--default_color));
+    }
+    /* 75%{
+        background: linear-gradient(to right,var(--default_invert_color),80%, var(--default_color), var(--default_invert_color) );
+    } */
+    100%{
+        background: linear-gradient(to right, var(--default_invert_color), 85%, var(--default_color) );
+    }
+}
 .default:hover > :nth-child(1){
     stroke:var(--default_color);
     fill:var(--default_color) ;

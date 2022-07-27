@@ -19,13 +19,21 @@ export const usePersonsStore = defineStore('persons', {
     setPerson(person: Person) {
       this.person = person
     },
+    async fetchOnePerson(id:string) {
+      this.loading = true
+      Api.shared().child('persons', id)
+        .get<Person>([], Person).then(p => {
+          this.person = p
+          this.loading = false
+      })
+    },
     async savePerson() {
       if (this.person) {
         const store = useEmployersStore()
         this.loading = true
         await Api.shared().child('persons')
           .post<CreatePersonDto, Person>(this.person.toCreate(), Person).then(r => {
-            this.loading = true
+            this.loading = false
             this.person = r
 store.employer.person = r
           })

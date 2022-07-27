@@ -1,24 +1,29 @@
 <template>
 <button :class="classes" :disabled="disabled">
     <slot>
-        <component v-if="icon" :is="icons[icon]"/>
+        <component class="icon" v-if="icon" :is="icons[icon]"/>
     </slot>
 </button>
 </template>
 <script setup lang="ts">
 import { computed } from 'vue';
-import EditIco from '../../assets/edit.svg'
-import DeleteIco from '../../assets/delete.svg'
+import EditIco from '../../assets/edit.svg';
+import AddIco from '../../assets/add-plus.svg';
+import AddPersonIco from '../../assets/add-user.svg';
+import DeleteIco from '../../assets/delete.svg';
+import SaveIco from '../../assets/save.svg';
 const icons = {
     edit:EditIco,
     delete:DeleteIco,
-    add:EditIco
+    add:AddIco,
+    add_person:AddPersonIco,
+    save:SaveIco
 }
 const props = defineProps<{
 disabled?:boolean
 vStyle?:'accept'|'delete'|'cancel'|'default'
 plain?:boolean
-icon?:'edit'|'delete'|'add'
+icon?:keyof typeof icons
 rounded?:boolean
 }>()
 const classes = computed(()=>{
@@ -55,6 +60,7 @@ cursor:not-allowed;
     color:lightgray
 
 }
+
 button:hover{
     cursor: pointer;
     // box-shadow: var(--common_button_shadows);
@@ -62,6 +68,14 @@ button:hover{
 
     transition: all .1s ease-in;
 }
-@import '../../assets/button-styles.css'
+// button:active{
+// background-color: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%); 
+// color:black;
+// }
+.icon{
+    width: 14px;
+    height: auto;
+}
+@import '../../assets/button-styles.css';
 
 </style>

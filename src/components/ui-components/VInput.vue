@@ -25,7 +25,7 @@ border:var(--common_input_border);
 font-size: var(--common_input_fontsize);
 line-height: var(--common_input_lineheight);
 font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-width: 15rem;   
+min-width: 15rem;   
 }
 input:focus{
 outline:none;

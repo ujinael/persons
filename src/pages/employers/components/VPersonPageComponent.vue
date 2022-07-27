@@ -1,8 +1,8 @@
 <template>
 
 
-<VPageComponent label="Основная информация">
-    <template #buttons>
+<VPageComponent label="Информация">
+    <template #rbuttons>
         <VButton :vStyle = "'accept'" 
         @click="openForm"
         rounded icon="edit"/>
@@ -11,7 +11,7 @@
   <VPersonCreateForm
   @save="updatePerson"
 v-model="showForm"
-:person-value="employer.person"/>  
+:person-value="person"/>  
 </VModal>
     <div class="content">
         <div class="avatar">
@@ -19,12 +19,12 @@ v-model="showForm"
         </div>
         <VLoader v-if="store.loading"/>
         <div class="info" v-else>
-            <ul v-if="employer.person">
-                <li>Фамилия:{{employer.person.surname}}</li>
-                <li>Имя:{{employer.person.name}}</li>
-                <li>Отчество:{{employer.person.patronymic}}</li>
-                <li>пол:{{employer.person.gender === 'male'?'мужчина':'женщина'}}</li>
-                <li>дата рождения:{{ date(employer.person?.dateOfBirth)}}</li>
+            <ul v-if="person">
+                <li>Фамилия:{{person.surname}}</li>
+                <li>Имя:{{person.name}}</li>
+                <li>Отчество:{{person.patronymic}}</li>
+                <li>пол:{{person.gender === 'male'?'мужчина':'женщина'}}</li>
+                <li>дата рождения:{{ date(person.dateOfBirth)}}</li>
             </ul>
 <div v-else>
 Не заполнена персональная информация. 
@@ -35,7 +35,7 @@ v-model="showForm"
 </VPageComponent>
 </template>
 <script setup lang="ts">
-import { useEmployersStore } from '../../../stores/modules';
+import { usePersonsStore } from '../../../stores/modules';
 import VPageComponent from '../../common_components/VPageComponent.vue';
 import VButton from '../../../components/ui-components/VButton.vue';
 import { storeToRefs } from 'pinia';
@@ -44,22 +44,21 @@ import VPersonCreateForm from '../../../components/form-components/VPersonCreate
 import { useToggle } from '../../../compositon';
 import VModal from '../../../components/VModal.vue';
 import VLoader from '../../../components/ui-components/VLoader.vue';
-const store = useEmployersStore()
-const {employer} = storeToRefs(store)
+const store = usePersonsStore()//useEmployersStore()
+const {person} = storeToRefs(store)
 const {date} = useDateUtils()
 const {toggleElement,elementVisible:showForm} = useToggle()
 const updatePerson = ()=>{
    toggleElement() 
 }
 const openForm =()=>{
-store.setPersonToPersonStore()
 toggleElement()
 }
 </script>
 <style scoped lang="scss">
 .content{
     display: grid;
-    width: 300px;
+    // width: 300px;
     grid-auto-flow: column;
     gap: .5rem;
 }

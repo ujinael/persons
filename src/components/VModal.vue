@@ -42,7 +42,7 @@ set(v){emit('update:modelValue',v)}
     height: 100vh;
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.391);
-    z-index: 1000;
+    z-index: var(--z_index-modal);
     display: flex;
     flex-direction: column;
     justify-content: center;

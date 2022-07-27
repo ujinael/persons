@@ -1,7 +1,7 @@
 <template>
 
 <VPageComponent label="Контакты">
-    <template #buttons>
+    <template #rbuttons>
      <VButton
      @click="toggleForm"
          :vStyle="'accept'" 
@@ -14,10 +14,10 @@
 </VModal>
 <ul v-if="phones.length">
 <li v-for="(item, index) in phones"
-:class="{primary:item.id === employer.person?.defaultPhone?.id}"
+:class="{primary:item.id === person?.defaultPhone?.id}"
 :key="index">
    <VPhone :phone="item"/> 
-   <span v-if="item.id === employer.person?.defaultPhone?.id">основной</span>
+   <span v-if="item.id === person?.defaultPhone?.id">основной</span>
 <VButton @click="phoneStore.removePhone(item.id!)"
  :vStyle="'delete'" rounded :icon="'delete'"/>
 </li>
@@ -29,7 +29,7 @@
 </VPageComponent>
 </template>
 <script setup lang="ts">
-import { useEmployersStore } from '../../../stores/modules';
+import { usePersonsStore } from '../../../stores/modules';
 import VPageComponent from '../../common_components/VPageComponent.vue';
 import VPhone from '../../../components/ui-components/VPhone.vue';
 import { storeToRefs } from 'pinia';
@@ -40,13 +40,16 @@ import VContactForm from '../../../components/form-components/VContactForm.vue';
 import { usePhonesStore } from '../../../stores/modules/phones/usePhonesStore';
 import { Phone, PhoneType } from '../../../stores/models';
 import { onMounted } from 'vue';
-const store = useEmployersStore()
-const  {employer} = storeToRefs(store)
+const store = usePersonsStore()
+const  {person} = storeToRefs(store)
 const phoneStore = usePhonesStore()
 const {phone,phones} = storeToRefs(phoneStore)
 onMounted(()=>{
-    if(employer.value.person)
-    phoneStore.fetchPhonesByPersonID(employer.value.person.id!)
+    setTimeout(()=>{
+  if(person.value)
+    phoneStore.fetchPhonesByPersonID(person.value.id!)
+    },500)
+  
 })
 
 const  {elementVisible:showForm,toggleElement} = useToggle()
@@ -61,10 +64,10 @@ toggleElement()
 }
 const save = ()=>{
     if(!phone.value.id){
-     phoneStore.savePhone(employer.value.person?.id!)   
+     phoneStore.savePhone(person.value?.id!)   
     }
     else{
-             phoneStore.updatePhone(employer.value.person?.id!)   
+             phoneStore.updatePhone(person.value?.id!)   
     }
 
 }
@@ -72,7 +75,7 @@ const save = ()=>{
 <style scoped lang="scss">
 ul{
     list-style: none;
-    width: 300px;
+    // width: 300px;
 }
 li{
     display: flex;

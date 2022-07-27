@@ -10,7 +10,7 @@
         <VInput v-model="person!.patronymic" type="text"/>
     </label>
      <label >Пол
-    <VSelect v-model="person!.gender" :options="['male','female']"/>
+    <VSelect v-model="person!.gender" :options="['male','female']" :label="`&male;${person?.gender}`"/>
     </label>
      <label>
         Дата рождения

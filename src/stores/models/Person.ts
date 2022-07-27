@@ -8,14 +8,7 @@ export enum Gender{
 }
 export class Person{
   id?:string
-  surname: string = 'Иванов'
-  name: string = 'Иван'
-  patronymic: string = 'Иванович'
-  dateOfBirth: Date
   pickDate: string = '1999-01-01'
-  gender: Gender = Gender.MALE
-  employerID?: string
-  clientID?:string
   @Type(() => Phone)
   phones: Phone[] = []
 
@@ -42,19 +35,19 @@ id:this.id??'',
       dateOfBirth: new Date(this.pickDate),
       gender: this.gender,
       employerID: this.employerID,
-      clientID:this.clientID
+      clientID: this.clientID,
+      
     }
   }
-  constructor(surname: string
-    , name: string
-    , patronymic: string
-    , dateOfBirth: Date
-    , gender: Gender) {
+  constructor(
+    public surname: string,
+    public name: string,
+    public patronymic: string,
+    public dateOfBirth: Date,
+    public gender: Gender,
+    public employerID?: string,
+ public clientID?:string
+  ) {
 
-    this.surname = surname
-    this.name = name
-    this.patronymic = patronymic
-    this.dateOfBirth = dateOfBirth
-    this.gender = gender
   }
 }

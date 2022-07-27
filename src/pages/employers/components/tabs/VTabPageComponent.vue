@@ -7,38 +7,54 @@
 </div>
 <div class="main">
   
-  <VTabBar class="tabbar" :align="'start'">
-    <VTabBarItem v-model="selectedView" title="Должности" value="positions"/>
-    <VTabBarItem  v-model="selectedView" title="Паспорта" value="passports"/>
-    <VTabBarItem  v-model="selectedView" title="Адреса" value="adresses"/>
-    <VTabBarItem  v-model="selectedView" title="Документы" value="docs"/>
+  <VTabBar v-model="direction" :activeView="selectedView" class="tabbar" :align="'start'">
+      <VTabBarItem class="t" v-for="item in tabsArray" 
+      :key = item v-model="selectedView"
+      :title="mapNames[item]"
+       :value="item"/>
   </VTabBar>
   <div class="content">
-    <component :is="tabs[selectedView]"></component>
+    <transition :name="direction" mode="out-in">
+        <component :is="tabs[selectedView]" :personID="person?.id"></component>
+    </transition>
   </div>
 </div>
   
 </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
+import {  onMounted, ref } from 'vue';
 import VTabPositionsComponent from './VTabPositionsComponent.vue'
 import VTabBar from '../../../../components/ui-components/VTabBar.vue';
 import VTabBarItem from '../../../../components/ui-components/VTabBarItem.vue';
 import VTabPassportsComponent from './VTabPassportsComponent.vue';
 import VTabAddressesComponent from './VTabAddressesComponent.vue';
 import VTabDocumentsComponent from './VTabDocumentsComponent.vue';
-const selectedView = ref<keyof typeof tabs>('positions')
+import {  usePersonsStore } from '../../../../stores/modules';
+import { storeToRefs } from 'pinia';
+const selectedView = ref<keyof typeof tabs>('passports')
+const props = defineProps<{
+tabsArray:Array<keyof typeof tabs>
+}>()
+onMounted(()=>{
+  selectedView.value = props.tabsArray[0]??'passports'
+})
+const mapNames = {
+  positions:'Должности',
+  passports:'Паспорта',
+  addresses:'Адреса',
+  docs:'Документы'
+}
 const tabs = {
   positions:VTabPositionsComponent,
     passports:VTabPassportsComponent,
       addresses:VTabAddressesComponent,
         docs:VTabDocumentsComponent
-
-
-
 }
+const direction = ref<'next'|'prev'>('next')
 
+const store = usePersonsStore()
+const {person} = storeToRefs(store)
 </script>
 <style scoped lang="scss">
 @import '../../../../assets/page-component.scss';
@@ -49,4 +65,8 @@ const tabs = {
 .tabbar{
   margin-bottom: 1rem;
 }
+
+
+@import '../../../../assets/slide-animation.scss';
+// @import '../../../../assets/show-animation.css';
 </style>

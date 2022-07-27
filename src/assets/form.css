@@ -13,3 +13,7 @@ form{
     display: flex;
     gap: .5rem;
 }
+label{
+    display: flex;
+    gap:.4rem;
+}

@@ -1,5 +1,6 @@
 export interface CreateAddressDto {
   typeID: string,
+  personID:string,
   country: string,
   region: string,
   city: string,
@@ -8,5 +9,7 @@ export interface CreateAddressDto {
   house: string,
   corpus: string,
   flat: string,
-  postIndex: string
+  registrationDate:Date,
+  postIndex?: string
+
 }

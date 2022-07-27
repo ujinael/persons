@@ -1,4 +1,4 @@
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import { CreatePassportDto } from '../../modules/passports/dto/create-passport.dto';
 import { UpdatePassportDto } from '../../modules/passports/dto/update-passport.dto';
 export class PassportType {
@@ -11,6 +11,9 @@ export class PassportType {
 
 export class Passport {
   id?: string;
+  // @Type(() => String)
+  // @Transform(({ value }) => "oki",{toClassOnly:true})//`${value.split('T')[0]}`)
+  // dateOfIssue:string  = '1999-01-01'
   constructor(
    
     public seria: string,

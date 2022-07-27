@@ -4,7 +4,8 @@
           <PhoneMobileIco v-if="phone.type === 'mobile'"/>
      <PhoneCityIco v-else="phone.type === 'city'"/>
     </div>
-  <div class="text">
+  <div class
+  ="text">
 {{toPhoneMask(phone.value)}}
   </div>
 
@@ -22,12 +23,16 @@ const {toPhoneMask} = usePhoneMask()
 </script>
 <style scoped lang="scss">
 span{
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-items: center;
+    gap:.4rem;
 }
 .icon{
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     justify-content: center;
-    width: 2rem;
+    // width: 2rem;
 }
 </style>

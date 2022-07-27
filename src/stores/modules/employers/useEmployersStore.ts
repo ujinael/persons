@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { Account, Gender, Person, Phone } from '../../models';
 import { Employer } from '../../models/Employer';
 import { Position } from '../../models/position/Position';
+import { Speciality } from '../../models/speciality/Speciality';
 import {  Api } from '../../server.api';
 import { usePersonsStore } from '../persons/usePersonsStore';
 import { CreateAccountDTO } from './dto/CreateAccountDTO';
@@ -22,9 +23,8 @@ export const useEmployersStore = defineStore('employers', {
     async fetchUsers() {
       this.loading = true
       await Api.shared().child('employers').get<Employer[]>([],Employer)
-        .then(resp => { 
-          
-          this.employers = resp//.map(r=>plainToClass(Employer,r))
+        .then(resp => {           
+          this.employers = resp
           this.loading = false
         })
 
@@ -34,21 +34,18 @@ export const useEmployersStore = defineStore('employers', {
       await Api.shared().child('employers',id).get<Employer>([],Employer)
         .then(resp => {   
           this.employer = resp
-          // this.employer = plainToClass(Employer,resp)
           this.loading = false
         })
 
     },
     async setPersonToPersonStore() {
       const store = usePersonsStore()
-      if (this.employer.person) {
-store.setPerson(this.employer.person)
-       }
-      else {
-        const person = new Person('', '', '', new Date(), Gender.MALE)
-        person.employerID = this.employer.id!
-        store.setPerson(person)
+      if (this.employer) {
+        const personStore = usePersonsStore()
+        if(this.employer.person)personStore.fetchOnePerson(this.employer?.person?.id!)
+else {personStore.setPerson(new Person('не заполнено','не заполнено','не заполнено',new Date(),Gender.MALE,this.employer.id,undefined))}
       }
+
     },
     async createNewEmployer() {
       this.loading = true
@@ -94,7 +91,28 @@ return r
           this.loading = false
 
       })
+    },
+    async setSpeciality(specialityID: string) {
+      this.loading = true
+      await Api.shared().child('employers',`${this.employer.id}/set_speciality`)
+        .update<{},Speciality>({}, Speciality, { key: 'specialityID', value: specialityID })
+        .then(p => {          
+          this.employer.specialities.unshift(p)
+          this.loading = false
+
+      })
+    },
+    async deleteSpeciality(specialityID:string) {
+      this.loading = true
+      await Api.shared().child('employers',`${this.employer.id}/unset_speciality`)
+        .update<{},string>({}, Speciality, { key: 'specialityID', value: specialityID })
+        .then(p => {
+          this.employer.specialities = this.employer.specialities.filter(p=>p.id!=specialityID)
+          this.loading = false
+
+      })
     }
+
   }
 
 })

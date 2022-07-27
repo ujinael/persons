@@ -4,6 +4,12 @@ table{
 }
 tr{
     height: 2.2rem;
+
+}
+.edit_mode{
+    box-sizing: border-box;
+    background-color: rgb(246, 249, 250);
+    /* border-bottom: 1px solid greenyellow; */
 }
 tr:hover{
     background-color: aliceblue;
@@ -16,6 +22,7 @@ th,td{
 thead{
     background-color: rgb(212, 227, 222);
     position: sticky;
+    z-index: 1001;
     height: 2.5rem;
     top: 0px;
     left: 0px;

@@ -1,14 +1,19 @@
 import { Type } from "class-transformer"
-import { Account } from "./Account"
 import { Person } from "./Person"
 import { Position } from "./position/Position"
+import { Speciality } from "./speciality/Speciality"
 
 export class Employer{
   id?: string
   @Type(()=>Person)
   person?: Person
+  personId?:string
   accountID?: string
-  positions:Position[] = []
+  @Type(()=>Position)
+  positions: Position[] = []
+  @Type(()=>Speciality)
+  specialities:Speciality[] = []
+
   constructor() {
   }
 }

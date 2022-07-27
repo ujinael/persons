@@ -6,6 +6,12 @@
 <VIcon :ico="'persons'"/>
         </router-link>
     </li>
+
+       <li>
+        <router-link :to="'/clients'">
+<VIcon :ico="'persons'"/>
+        </router-link>
+    </li>
     <li>
    <router-link :to="'/departments'">
 <VIcon :ico="'list'"/>
@@ -14,6 +20,26 @@
     <li>
    <router-link :to="'/employers'">
 <VIcon :ico="'book'"/>
+        </router-link>
+    </li>
+      <li>
+   <router-link :to="'/specialities'">
+<VIcon :ico="'list'"/>
+        </router-link>
+    </li>
+        <li>
+   <router-link :to="'/nomenclature'">
+<VIcon title="номенклатура" :ico="'list'"/>
+        </router-link>
+    </li>
+      <li>
+   <router-link :to="'/prices'">
+<VIcon title="цены" :ico="'book'"/>
+        </router-link>
+    </li>
+       <li>
+   <router-link :to="'/timetable'">
+<VIcon title="цены" :ico="'book'"/>
         </router-link>
     </li>
      <li>

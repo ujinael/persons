@@ -10,6 +10,7 @@ import { test } from './stores/utils/deserializator'
 import { VPhonemask } from './directives/VPhonemask'
 import messagePlugin from './plugins/message.plugin'
 import { useGlobalStore } from './stores/modules/global/useGlobalStore'
+import { vFocus } from './directives/VFocus'
 test()
 const app = createApp(App)
 app.use(router)
@@ -21,7 +22,9 @@ const store = useGlobalStore()
 // directives.forEach(directive => {
 // });
 // for (var key in directives) {
-    app.directive('phonemask', VPhonemask)
+app.directive('phonemask', VPhonemask)
+app.directive('focus', vFocus)
+
 app.config.errorHandler = (er, instanse) => {
   // console.log(er);
   store.setError(er as Error)

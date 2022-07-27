@@ -41,7 +41,7 @@ const {error} = storeToRefs(store)
 color: white;
 // font-size: small;
 position:fixed;
-z-index:7000;
+z-index:var(--z_index-message);
 top:30px;
 right:15px;
 width:250px;

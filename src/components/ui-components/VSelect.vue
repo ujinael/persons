@@ -1,14 +1,14 @@
 <template>
-<div class="backdrop" v-if="dropdownVisible"
-
-@click="showDropdown">
-
-</div>
-<div class="select" tabindex="0"
+<div class="select" ref="target" tabindex="0"
  @click="showDropdown">
 <div class="select_value">
   <div class="select_label" v-if="value">
-      {{label?label: value}}
+  <span v-if="label">
+    {{label}}
+  </span>
+  <span v-else>
+    {{typeof value === 'string'?value:`${value.title}`}}
+  </span>
   </div>
   <div class="select_label" v-else>
     выбрать
@@ -32,25 +32,29 @@
 
 </template>
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useToggle } from '../../compositon';
 import ArrowIco from '../../assets/right-arrow-svgrepo-com.svg'
+import { onClickOutside } from '@vueuse/core'
+const target = ref<HTMLDivElement|undefined>(undefined)
 interface Option{
+  id?:string
   title:string
-  value:Object
 }
+onClickOutside(target,()=>{
+  dropdownVisible.value = false
+})
 const props = defineProps<{
-modelValue?:string|Object|null,
-options:string[]|Option[]
+modelValue:Option|string|undefined|null,
+options:string[]|Array<Option>
 label?:string
 }>()
-const select = (option:Option|string)=>{
-  if(typeof option === 'string'){value.value = option}
-else value.value = option.value
+const select = (option:Option|string)=>{  
+value.value = option
 emit('select',option)
 }
 const emit = defineEmits(['update:modelValue','select'])
-const value = computed<string|Object|undefined|null>({
+const value = computed<string|Option|undefined|null>({
 get(){return props.modelValue},
 set(v){emit('update:modelValue',v)}
 })
@@ -58,9 +62,9 @@ const {elementVisible:dropdownVisible,toggleElement} = useToggle()
 const showDropdown = ()=>{
 toggleElement()
 }
-const onBlur=()=>{
-  if(dropdownVisible)toggleElement()
-}
+// const onBlur=()=>{
+//   if(dropdownVisible)toggleElement()
+// }
 </script>
 <style scoped lang="scss">
 @import '../../assets/show-animation.css';
@@ -116,18 +120,22 @@ cursor: default;
 .ico{
   height: 1rem;
 transform: rotate(90deg);
+transition: transform .2s ease-in-out;
 
 }
 .ico.open{
 transform: rotate(270deg);
-transition: all .2s ease-in-out;
+transition: transform .2s ease-in-out;
 }
 .dropdown{
-  position: absolute;
-  top:calc(var(--common_input_height) - 2px);
+  // position: fixed;
+    position: absolute;
+
+  // top:calc(var(--common_input_height) - 2px);
+  top:100%;
   left:0px;
   width: 100%;
-  z-index: 15000;
+  z-index: var(--z_index-dropdown);
   background-color: rgb(0, 0, 0,.7);
   height: fit-content;
   overflow-y: auto;

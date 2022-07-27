@@ -11,6 +11,7 @@ export interface UpdateAddressDto {
   house?: string,
   corpus?: string,
   flat?: string,
+  registrationDate?:Date,
   postIndex?: string
 }
 

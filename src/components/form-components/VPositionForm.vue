@@ -31,7 +31,7 @@ const onSave = ()=>{
     else{
     
         store.savePosition(departmentStore.department?.id!).then(p=>{
-          departmentStore.department?.positions?.unshift(p)
+          departmentStore.department?.positions?.unshift(p.title)
           emit('close')
         })
     }

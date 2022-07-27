@@ -1,7 +1,7 @@
 <template>
 
 <VPageComponent :label="'Аккаунт'">
-    <template #buttons>
+    <template #rbuttons>
         <VButton
         @click="editMode = !editMode"
          :vStyle="'accept'" 
@@ -116,6 +116,10 @@ const saveAccount = ()=>{
 }
 </script>
 <style scoped lang="scss">
+.page_component{
+    width: 100%;
+    height: 100%;
+}
 ul{
     list-style: none;
     text-align: left;
@@ -130,7 +134,7 @@ label{
     margin-right: .2rem;
 }
 .content{
-    width: 350px;
+    // width: 350px;
 }
 strong{
     text-decoration: underline;
@@ -153,5 +157,5 @@ label{
 }
 @import '../../../assets/inline_input.scss';
 @import '../../../assets/tips.scss';
-@import '../../../assets/show-animation.css'
+@import '../../../assets/show-animation.css';
 </style>

@@ -4,14 +4,14 @@
 <VDepartmentForm @close="toggleElement"/>
     </VModal>
     <VPageComponent label="Отделения">
-        <template #buttons>
+        <template #rbuttons>
             <VButton @click="createDepartment" rounded >+</VButton>
         </template>
             <VDepartmentsCatalogue/>
     </VPageComponent>
     <transition name="fade">
         <VPageComponent v-if="store.department" label="Должности">
-        <template #buttons>
+        <template #rbuttons>
             <VButton @click="createPosition" rounded >+</VButton>
         </template>
             <VPositionsCatalogue/>
@@ -50,5 +50,5 @@ positionsStore.toggleForm()
     grid-template-columns:repeat(2,1fr) ;
     gap: 1rem;
 }
-@import '../../assets/show-animation.css'
+@import '../../assets/show-animation.css';
 </style>
