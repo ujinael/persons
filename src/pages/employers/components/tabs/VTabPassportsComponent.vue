@@ -42,7 +42,7 @@
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { useToggle } from '../../../../compositon';
+import { useToggle } from '../../../../composition';
 import { usePassportsStore } from '../../../../stores/modules/passports/usePassportsStore';
 import VModal from '../../../../components/VModal.vue';
 import VPassportForm from '../../../../components/form-components/VPassportForm.vue';

@@ -25,15 +25,14 @@ type Endpoints =
   | 'phones'
   | 'measure_units'
   | 'nomenclature_items'
-  |'nomenclature'
+  | 'nomenclature'
   | 'categories'
   | 'clients'
-  | 'employers'
   | 'employers'
   | 'positions'
   | 'timetable_presets'
   | 'timetables'
-  | 'events'
+  | 'schedule_events'
   | 'tasks'
   | 'prices'
   | 'passports'
@@ -55,7 +54,12 @@ type Endpoints =
   | 'nomenclature_types'
   | 'price_items'
   | 'price_lists'
-  | 'currency_types';
+  | 'currency_types'
+  | 'schedulle_presets'
+  | 'employer_schedulles'
+  | 'employers_positions'
+  | 'month_schedulles'
+  | 'task_schedulles';
 
 export interface Query {
   key: string;

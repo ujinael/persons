@@ -17,7 +17,7 @@ import VPageComponent from '../common_components/VPageComponent.vue';
 import VButton from '../../components/ui-components/VButton.vue';
 import VModal from '../../components/VModal.vue';
 import {useSpecialitiesStore} from '../../stores/modules/specialities/useSpecialitiesStore'
-import { useToggle } from '../../compositon';
+import { useToggle } from '../../composition';
 import VSpecialityForm from '../../components/form-components/VSpecialityForm.vue';
 const store = useSpecialitiesStore()
 const {elementVisible:showForm,toggleElement} = useToggle()

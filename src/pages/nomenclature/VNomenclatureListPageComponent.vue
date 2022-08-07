@@ -20,7 +20,7 @@ import VButton from '../../components/ui-components/VButton.vue';
 import VNomenclatureList from '../../components/catalogues/VNomenclatureList.vue';
 import VNomenclatureTree from '../../components/catalogues/VNomenclatureTree.vue';
 
-import { useToggle } from '../../compositon';
+import { useToggle } from '../../composition';
 import VModal from '../../components/VModal.vue';
 import VNomenclatureForm from '../../components/form-components/VNomenclatureForm.vue';
 import { useNomenclatureItemsStore } from '../../stores/modules/nomenclature_items/useNomenclatureItemsStore';

@@ -1,0 +1,8 @@
+.selection_rectangle {
+    background-color: rgb(218, 218, 244, 0.2);
+    backdrop-filter: blur(4px);
+    pointer-events: none;
+    border: 1px solid white;
+    border-radius: 0.2rem;
+    box-shadow: 1px 1px 1px gray;
+  }

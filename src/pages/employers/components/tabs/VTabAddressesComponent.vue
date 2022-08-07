@@ -44,7 +44,7 @@
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { useToggle } from '../../../../compositon';
+import { useToggle } from '../../../../composition';
 import VModal from '../../../../components/VModal.vue';
 import { onMounted } from 'vue';
 import { Address } from '../../../../stores/models/address/Address';

@@ -51,7 +51,7 @@
 import { useEmployersStore } from '../../../../stores/modules';
 import VTip from '../../../../components/ui-components/VTip.vue';
 import { storeToRefs } from 'pinia';
-import { useToggle } from '../../../../compositon';
+import { useToggle } from '../../../../composition';
 import VPositionSetForm from '../../../../components/form-components/VPositionSetForm.vue';
 import VSpecialitySetForm from '../../../../components/form-components/VSpecialitySetForm.vue';
 

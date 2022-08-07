@@ -4,9 +4,10 @@
     <div class="wrapper">
         <div class="content">
             <div class="header">
-<span>{{title}}</span>
+<h2 class="title">{{title}}</h2>
 <div class="close_btn" @click="value = !value">
-  <CloseIco class="close_ico"/>  
+&times;
+  <!-- <CloseIco class="close_ico"/>   -->
 </div>
             </div>
             <div class="body">
@@ -61,11 +62,20 @@ justify-content: center;
    border-radius: .4rem; 
 }
 .header{
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 80% 1fr;
     justify-content: space-between;
 }
+.title{
+    grid-area: 1/2/2/3;
+}
 .close_btn{
-     height: 1rem;
+    color: gray;
+justify-self: flex-end;
+    grid-area: 1/3/2/4;
+    font-size: xx-large;
+    line-height: 1rem;
+    height: 1rem;
     width: auto;
     border-radius: .5rem;
     cursor: pointer;
@@ -74,9 +84,11 @@ justify-content: center;
      filter: drop-shadow(.1rem .1rem .2rem gray);
   transition: all .2s ease-in;
 }
-.close_ico{
-   height: 100%;
+.close_btn:active{
+     transform: scale(1.5);
+  transition: all .2s ease-in;
 }
+
 
 // .fade-enter-active,
 // .fade-leave-active {

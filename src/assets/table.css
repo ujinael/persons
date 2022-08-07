@@ -4,7 +4,7 @@ table{
 }
 tr{
     height: 2.2rem;
-
+box-sizing: border-box;
 }
 .edit_mode{
     box-sizing: border-box;
@@ -22,7 +22,7 @@ th,td{
 thead{
     background-color: rgb(212, 227, 222);
     position: sticky;
-    z-index: 1001;
+    z-index: var(--z_index-header);
     height: 2.5rem;
     top: 0px;
     left: 0px;

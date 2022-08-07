@@ -35,7 +35,7 @@ import VPhone from '../../../components/ui-components/VPhone.vue';
 import { storeToRefs } from 'pinia';
 import VButton from '../../../components/ui-components/VButton.vue';
 import VModal from '../../../components/VModal.vue';
-import { useToggle } from '../../../compositon';
+import { useToggle } from '../../../composition';
 import VContactForm from '../../../components/form-components/VContactForm.vue';
 import { usePhonesStore } from '../../../stores/modules/phones/usePhonesStore';
 import { Phone, PhoneType } from '../../../stores/models';

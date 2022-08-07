@@ -24,7 +24,7 @@ import { useNomenclatureItemsStore } from '../../stores/modules/nomenclature_ite
 import VDataTreeItem from '../ui-components/VDataTree.vue/VDataTreeItem.vue';
 import VModal from '../VModal.vue';
 import VNomenclatureForm from '../form-components/VNomenclatureForm.vue';
-import { useToggle } from '../../compositon';
+import { useToggle } from '../../composition';
 import { Data, DataTree, NomenclatureItem } from '../../stores/models';
 
 

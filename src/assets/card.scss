@@ -1,0 +1,16 @@
+.card{
+    width: 9rem;
+    box-shadow: var(--common_shadows);    
+    border-radius: var(--common_border_radius);
+    background-clip: border-box;
+    box-sizing: border-box;
+        // border:1px solid transparent;
+    
+    }
+    .card:hover{
+    cursor: pointer;
+    }
+    // .card:active{
+    //     transform: scale(1.05);
+    //     transition: all .2s ease;
+    // }

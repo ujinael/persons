@@ -10,7 +10,9 @@ import Playground from '../pages/Playground.vue'
 import VNomenclatureListPage from '../pages/nomenclature/VNomenclatureListPage.vue'
 import VPriceListPage from '../pages/prices/VPriceListPage.vue'
 import VPriceDetaiPage from '../pages/prices/VPriceDetail.vue'
-import VEmployerTimetableVue from '../pages/timetable/VEmployerTimetable.vue'
+import VTimetableDetailPage from '../pages/timetable/VTimetableDetailPage.vue'
+import VTimetableListPage  from '../pages/timetable/VTimetableListPage.vue'
+import VTaskSchedullerPageVue from '../pages/task_schedulle/VTaskSchedullerPage.vue'
 const routes = [
 
 {path:'/',
@@ -78,8 +80,20 @@ meta:{layout:'main-layout',authRequired:true },
   },
   {
     path:'/timetable',
-    name:'VEmployerTimetableVue',
-component:VEmployerTimetableVue,
+    name:'VTimetableListPage',
+component:VTimetableListPage,
+meta:{layout:'main-layout',authRequired:true },
+  },
+  {
+    path:'/scheduller',
+    name:'VTaskSchedullerPageVue',
+component:VTaskSchedullerPageVue,
+meta:{layout:'main-layout',authRequired:true },
+  },
+  {
+    path:'/timetable/:id',
+    name:'VTimetableDetailPage',
+component:VTimetableDetailPage,
 meta:{layout:'main-layout',authRequired:true },
   },
   {

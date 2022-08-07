@@ -42,6 +42,12 @@
 <VIcon title="цены" :ico="'book'"/>
         </router-link>
     </li>
+         <li>
+   <router-link :to="'/scheduller'">
+<VIcon title="цены" :ico="'book'"/>
+        </router-link>
+    </li>
+    
      <li>
    <router-link :to="'/playground'">
 <VIcon :ico="'list'"/>

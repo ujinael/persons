@@ -41,7 +41,7 @@ import VButton from '../../../components/ui-components/VButton.vue';
 import { storeToRefs } from 'pinia';
 import { useDateUtils } from '../../../composition/useDateUtils';
 import VPersonCreateForm from '../../../components/form-components/VPersonCreateForm.vue';
-import { useToggle } from '../../../compositon';
+import { useToggle } from '../../../composition';
 import VModal from '../../../components/VModal.vue';
 import VLoader from '../../../components/ui-components/VLoader.vue';
 const store = usePersonsStore()//useEmployersStore()

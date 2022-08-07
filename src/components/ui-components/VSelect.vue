@@ -33,7 +33,7 @@
 </template>
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { useToggle } from '../../compositon';
+import { useToggle } from '../../composition';
 import ArrowIco from '../../assets/right-arrow-svgrepo-com.svg'
 import { onClickOutside } from '@vueuse/core'
 const target = ref<HTMLDivElement|undefined>(undefined)

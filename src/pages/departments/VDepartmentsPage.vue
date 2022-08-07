@@ -26,7 +26,7 @@ import VDepartmentForm from '../../components/form-components/VDepartmentForm.vu
 import VPageComponent from '../common_components/VPageComponent.vue';
 import VButton from '../../components/ui-components/VButton.vue';
 import VModal from '../../components/VModal.vue';
-import { useToggle } from '../../compositon';
+import { useToggle } from '../../composition';
 import { useDepartmentsStore } from '../../stores/modules/departments/useDepartmentsStore';
 import { usePositionsStore } from '../../stores/modules/positions/usePositionsStore';
 

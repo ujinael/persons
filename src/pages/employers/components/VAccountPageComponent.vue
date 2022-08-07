@@ -70,7 +70,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import VButton from '../../../components/ui-components/VButton.vue';
-import { useToggle } from '../../../compositon';
+import { useToggle } from '../../../composition';
 import { useEmployersStore,useAccountsStore } from '../../../stores/modules';
 import VPageComponent from '../../common_components/VPageComponent.vue';
 import VModal from '../../../components/VModal.vue';

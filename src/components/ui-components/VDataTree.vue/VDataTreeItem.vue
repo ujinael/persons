@@ -33,7 +33,7 @@
 </li>
 </template>
 <script setup lang="ts">
-import { useToggle } from '../../../compositon';
+import { useToggle } from '../../../composition';
 import {DataTree,Data} from '../../../stores/models'
 import ArrowIco from '../../../assets/right-arrow-svgrepo-com.svg'
 const props = defineProps<{

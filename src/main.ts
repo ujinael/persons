@@ -11,6 +11,9 @@ import { VPhonemask } from './directives/VPhonemask'
 import messagePlugin from './plugins/message.plugin'
 import { useGlobalStore } from './stores/modules/global/useGlobalStore'
 import { vFocus } from './directives/VFocus'
+import { vSelectableArea } from './directives/VSelectionArea'
+import { vGridResizable } from './directives/VGridResizable'
+import { vResizable } from './directives/VResizable'
 test()
 const app = createApp(App)
 app.use(router)
@@ -24,6 +27,9 @@ const store = useGlobalStore()
 // for (var key in directives) {
 app.directive('phonemask', VPhonemask)
 app.directive('focus', vFocus)
+app.directive('selectable-area', vSelectableArea)
+app.directive('grid-resizable', vGridResizable)
+app.directive('resizable', vResizable)
 
 app.config.errorHandler = (er, instanse) => {
   // console.log(er);
