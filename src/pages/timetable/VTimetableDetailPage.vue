@@ -81,7 +81,8 @@ const onConfirm = ()=>{}
 .page {
   display: grid;
   gap: 1rem;
-  grid-template-columns: 1fr;
+  grid-template-rows:min-content min-content 1fr ;
+  // grid-template-columns: 1fr;
 }
 #date_buttons {
   width: 1.5rem;

@@ -27,6 +27,8 @@ import { EmployerSchedulle } from '../../../stores/models/employer_schedulle/Emp
 import { computed, onMounted, ref } from 'vue';
 import { SchedulleEvent } from '../../../stores/models/schedulle_event/schedulle_event';
 import { TimeCell } from '../../../stores/models/index.js';
+import { useSchedulleEventsStore } from '../../../stores/modules/schedulle_events/useSchedulleEventsStore';
+import { storeToRefs } from 'pinia';
 
 const props = defineProps<{
   employerSchedulle: EmployerSchedulle;
@@ -36,15 +38,22 @@ const props = defineProps<{
   timeStep: number;
 }>();
 
-const events = ref<SchedulleEvent[]>([]);
+const store = useSchedulleEventsStore()
+const {schedulleEvents} = storeToRefs(store)
+
+const events = computed(()=>{
+return schedulleEvents.value.filter(e=>e.employersPositionId === props.employerSchedulle.employerPosition?.id)
+})
 const parentHeight = ref(0)
 const createEvent = (event: MouseEvent, cell: TimeCell) => {
   
   const cell$ = event.target as HTMLDivElement;
   const rect = cell$.getBoundingClientRect();
   const parentRect = column.value!.getBoundingClientRect()
-  const newEvent = new SchedulleEvent(cell.start, cell.end
-  , {
+  const newEvent = new SchedulleEvent(
+    cell.start,
+     cell.end,
+      {
     top: rect.top - parentRect.top,
     height: rect.height,
   },
@@ -53,15 +62,16 @@ const createEvent = (event: MouseEvent, cell: TimeCell) => {
   ,height:rect.height
   },
   {
-    top:1
+    top:0
     ,bottom:parentRect.height,
-    // ,maxHeight:
     minHeight:rect.height
-  }
-  //{gridRowStart:cell.style.gridRowStart,gridRowEnd:cell.style.gridRowEnd,height:cell.style.height}
-  );
+  },
+  props.employerSchedulle.employerPosition?.id!,
+  undefined,
+  props.employerSchedulle.employerPosition
   
-  events.value.push(newEvent);
+  );  
+  schedulleEvents.value.push(newEvent);
 };
 
 const {
@@ -77,8 +87,6 @@ const minutesInPixel = computed(()=>{
 return 0
 })
 const startResize=(item:SchedulleEvent)=>{
-// console.log(events.value.map(e=>e.position.height));
-
 item.constraints.top = getTopConstraint(item)
 item.constraints.bottom = getBottomConstraint(item)
 }
@@ -98,7 +106,7 @@ const lowerEvents = events.value.filter(e=>
 if(lowerEvents.length){
   return lowerEvents[0].position.top
   }
-return parentHeight.value - item.position.top
+return parentHeight.value
 }
 onMounted(() => {
   if(column.value)
@@ -114,10 +122,7 @@ onMounted(() => {
   color: whitesmoke;
   box-shadow: 1px 1px 5px lightgrey;
   background-color: lightgray;
-  // gap: 1px;
 }
-.event {
-  // grid-column: 1/2;
-}
+
 @import '../../../assets/show-animation.css';
 </style>

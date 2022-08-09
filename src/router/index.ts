@@ -12,7 +12,7 @@ import VPriceListPage from '../pages/prices/VPriceListPage.vue'
 import VPriceDetaiPage from '../pages/prices/VPriceDetail.vue'
 import VTimetableDetailPage from '../pages/timetable/VTimetableDetailPage.vue'
 import VTimetableListPage  from '../pages/timetable/VTimetableListPage.vue'
-import VTaskSchedullerPageVue from '../pages/task_schedulle/VTaskSchedullerPage.vue'
+import VRequestSchedullerPageVue from '../pages/request_schedulle/VRequestSchedullerPage.vue'
 const routes = [
 
 {path:'/',
@@ -86,8 +86,8 @@ meta:{layout:'main-layout',authRequired:true },
   },
   {
     path:'/scheduller',
-    name:'VTaskSchedullerPageVue',
-component:VTaskSchedullerPageVue,
+    name:'VRequestSchedullerPageVue',
+component:VRequestSchedullerPageVue,
 meta:{layout:'main-layout',authRequired:true },
   },
   {

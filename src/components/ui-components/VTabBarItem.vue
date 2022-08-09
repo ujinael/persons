@@ -37,7 +37,6 @@ const tabClick = (tab:string|number)=>{
 <style lang="scss" scoped>
 .tab{
     box-sizing: border-box;
-   
 }
 .tab:hover{
     cursor: pointer;

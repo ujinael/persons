@@ -6,12 +6,9 @@ export const vResizable: Directive = {
   mounted(el: HTMLElement, binding: DirectiveBinding<{
     hooks?: ResizeHooks
     resizeStep?:number
-  }>) {
-    console.log(binding.value.resizeStep);
-    
+  }>) {    
     const constraints = binding.arg as ResizeConstraints
     const resizeStep = binding.value.resizeStep ?? 10
-    // el.style.position = 'absolute'
     const topResizer = document.createElement('div')
     topResizer.classList.add('resizer', 'top')
     topResizer.style.width = '100%'
@@ -34,12 +31,11 @@ export const vResizable: Directive = {
       if (binding.value.hooks && binding.value.hooks.start) binding.value.hooks.start(el, resizerType)
       document.documentElement.style.cursor = resizerType === 'top' ? 'n-resize' : 's-rezize'
       document.body.onselectstart = function (e) { return false };
-
+      
       var rect = el.getBoundingClientRect()
       let newHeight = el.clientHeight;
       let elTop = +el.style.top.replace(/[^0-9]/g,'')      
       var vOffSet = e.clientY - rect.top
-
       document.addEventListener('mousemove', onMouseMove)
       document.addEventListener('mouseup', onMouseUp)
       function onMouseMove(ev: MouseEvent) {

@@ -73,6 +73,9 @@ const clisk = ()=>{
 .end{
     justify-content: flex-end;
 }
+.start,.end{
+    gap:1rem;
+}
 .vertical{
 grid-auto-flow: row;
 // grid-template-rows: repeat(auto-fill,min-content);    

@@ -1,5 +1,5 @@
 <template>
-<div class="tip" >
+<div class="tip" ref="target">
  <span 
   @click="emit('click',$event)"
   :class="classes">
@@ -7,15 +7,18 @@
     <CloseIco @click="emit('onDeleteClick')" v-if="remove" class="ico"/>
  </span>   
  <transition name="fade">
- <div class="dropdown" v-if="value">
-  <slot name="dropdown"
+ <div class="dropdown" ref="dropdown" v-show="value">
+ <div class="content">
+    <slot name="dropdown"
   ></slot>
+ </div>
+
  </div>
  </transition>
 </div>
 </template>
 <script setup lang="ts">
-import { computed } from '@vue/reactivity';
+import { computed, ref } from '@vue/reactivity';
 import CloseIco from '../../assets/close.svg'
 const props = defineProps<{
 title:string
@@ -25,7 +28,10 @@ modelValue?:boolean
 }>()
 
 const value = computed<boolean|undefined>({
-get(){return props.modelValue},
+get(){
+  
+if(props.modelValue)showDropdown()
+  return props.modelValue},
 set(v){emit('update:modelValue',v)}
 })
 const emit = defineEmits(['onDeleteClick','update:modelValue','click'])
@@ -35,6 +41,15 @@ const classes = computed(()=>{
     default:!props.type || props.type === 'default' 
   }
 })
+const target = ref<HTMLDivElement|undefined>(undefined)
+const dropdown = ref<HTMLDivElement>()
+const showDropdown = ()=>{
+if(!target.value) return
+if(!dropdown.value) return
+const rect = target.value.getBoundingClientRect()
+dropdown.value.style.top = rect.bottom + 'px'
+dropdown.value.style.left = rect.left + 'px'
+}
 </script>
 <style scoped lang="scss">
 span{
@@ -54,7 +69,7 @@ border-radius: var(--common_border_radius);
 display: flex;
 align-self: center;
 justify-self: left;
-position: relative;
+// position: relative;
 
 }
 span{
@@ -96,11 +111,12 @@ brightness(60%)
 }
 .dropdown{
   position: absolute;
-  top: 1.3rem;
-  left: 0;
+  // top: 1.3rem;
+  // left: 0;
   border-radius: var(--common_border_radius);
-  min-height: 100%;
-  min-width: 100%;
+  // min-height: 100%;
+  width: fit-content;
+  // min-width: 100%;
   border: 1px solid lightgray;
   background-color: white;
 }

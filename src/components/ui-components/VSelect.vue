@@ -18,7 +18,7 @@
 </div>
 </div>
 <transition name="fade">
-   <div class="dropdown" v-if="dropdownVisible">
+   <div class="dropdown" ref="dropdown" v-show="dropdownVisible">
   <ul>
     <li v-for="option in options" @click="select(option)">
     {{typeof option === 'string'?option:option.title }}
@@ -37,6 +37,7 @@ import { useToggle } from '../../composition';
 import ArrowIco from '../../assets/right-arrow-svgrepo-com.svg'
 import { onClickOutside } from '@vueuse/core'
 const target = ref<HTMLDivElement|undefined>(undefined)
+const dropdown = ref<HTMLDivElement>()
 interface Option{
   id?:string
   title:string
@@ -60,6 +61,12 @@ set(v){emit('update:modelValue',v)}
 })
 const {elementVisible:dropdownVisible,toggleElement} = useToggle()
 const showDropdown = ()=>{
+if(!target.value) return
+if(!dropdown.value) return
+const rect = target.value.getBoundingClientRect()
+dropdown.value.style.width = rect.width + 'px'
+dropdown.value.style.top = rect.bottom + 'px'
+dropdown.value.style.left = rect.left + 'px'
 toggleElement()
 }
 // const onBlur=()=>{
@@ -69,7 +76,7 @@ toggleElement()
 <style scoped lang="scss">
 @import '../../assets/show-animation.css';
 .select{
-  position: relative;
+  // position: relative;
   box-sizing: border-box;
   background-color: transparent;
   background-clip: padding-box;
@@ -82,14 +89,7 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 }
-.backdrop{
-  position: absolute;
-  top:0px;
-  left: 0px;
-  width: 100vw;
-  height: 100vh;
-  // background-color: gray;
-}
+
 .select:focus{
   outline: none;
   border:var(--common_input_hovered_border);
@@ -130,11 +130,6 @@ transition: transform .2s ease-in-out;
 .dropdown{
   // position: fixed;
     position: absolute;
-
-  // top:calc(var(--common_input_height) - 2px);
-  top:100%;
-  left:0px;
-  width: 100%;
   z-index: var(--z_index-dropdown);
   background-color: rgb(0, 0, 0,.7);
   height: fit-content;

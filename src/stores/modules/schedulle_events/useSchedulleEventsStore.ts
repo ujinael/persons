@@ -1,5 +1,7 @@
 
 import { defineStore } from 'pinia'
+import { SchedulleInterval } from '../../models';
+import { EmployerSchedulle } from '../../models/employer_schedulle/EmployerSchedulle';
 import { SchedulleEvent } from '../../models/schedulle_event/schedulle_event';
 import {  Api } from '../../server.api';
 import { CreateSchedulleEventDto } from './dto/create-schedulleEvent.dto';
@@ -7,19 +9,43 @@ import { UpdateSchedulleEventDto } from './dto/update-schedulleEvent.dto';
 type SchedulleEventsState = {
   loading: boolean
   schedulleEvent: SchedulleEvent | null
-  schedulleEvents:SchedulleEvent[]
+  schedulleEvents: SchedulleEvent[]
+  employerSchedulles: EmployerSchedulle[]
+  currentDate: Date,
+  organizationWorkingInterval:SchedulleInterval|null
+
 }
 export const useSchedulleEventsStore = defineStore('schedulleEvents', {
   state: ():SchedulleEventsState => {
     return {
-      loading:false,
+      loading: false,
+      employerSchedulles:[],
       schedulleEvent: null,
-     schedulleEvents:[]
+      schedulleEvents: [],
+      currentDate: new Date(),
+      organizationWorkingInterval:new SchedulleInterval(
+        new Date(2022, 8, 5, 9, 0, 0)
+        , new Date(2022, 8, 5, 20, 0, 0))
+
     }
   },
   actions: {
+    async fetchEmployerSchedulle() {
+
+    
+      await Api.shared()
+        .child('employer_schedulles')
+        .get<EmployerSchedulle[]>([{key:'date',value:this.currentDate.toISOString()}], EmployerSchedulle)
+        .then((r) => {
+
+
+       this.employerSchedulles = r   
+          
+        });
+
+    },
 setSchedulleEvents(schedulleEvent?: SchedulleEvent) {
-this.schedulleEvent = schedulleEvent ?? new SchedulleEvent(new Date(),new Date())
+this.schedulleEvent = schedulleEvent ?? new SchedulleEvent(new Date(),new Date(),{},{},{},'','',undefined)
 },
 async fetchSchedulleEventss() {
 this.loading = true

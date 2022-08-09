@@ -33,7 +33,7 @@ type Endpoints =
   | 'timetable_presets'
   | 'timetables'
   | 'schedule_events'
-  | 'tasks'
+  | 'requests'
   | 'prices'
   | 'passports'
   | 'passport_types'
@@ -59,7 +59,7 @@ type Endpoints =
   | 'employer_schedulles'
   | 'employers_positions'
   | 'month_schedulles'
-  | 'task_schedulles';
+  | 'request_schedulles';
 
 export interface Query {
   key: string;
