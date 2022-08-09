@@ -8,7 +8,12 @@
 <!-- <VRequestEventCard 
 v-for="(item, index) in [...Array(10)].keys()" :key="index"
 /> -->
+<ul v-if="requestSchedulle">
 
+  <li v-for="(item, index) in requestSchedulle.nomenclatureItems" :key="index">
+{{item.coast}}
+  </li>
+</ul>
  </div>
 
 </fieldset>
@@ -18,10 +23,13 @@ import { onMounted, ref } from 'vue';
 import VRequestPriceList from './VRequestPriceList.vue'
 import VRequestDropdown from './VRequestDropdown.vue';
 import { useToggle } from '../../../composition';
+import { useRequestSchedullesStore } from '../../../stores/modules/request_schedulles/useRequestSchedullesStore';
+import { storeToRefs } from 'pinia';
 
 const fieldset = ref<HTMLFieldSetElement>()
 const dropdown = ref<InstanceType<typeof VRequestDropdown>>()
-
+const store = useRequestSchedullesStore()
+const {requestSchedulle} = storeToRefs(store)
 const {elementVisible:dropdownVisible,toggleElement:toggleDropdown} = useToggle()
 const showDropDown = ()=>{
 if(!fieldset.value )return

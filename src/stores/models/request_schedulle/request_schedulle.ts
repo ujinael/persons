@@ -4,7 +4,7 @@ import {CreateRequestSchedulleDto} from '../../modules/request_schedulles/dto/cr
 import {UpdateRequestSchedulleDto} from '../../modules/request_schedulles/dto/update-request-schedulle.dto'
 import { Client } from "../client/Client"
 import { RequestNomenclatureItem } from "../../models"
-import { SchedulleEven } from "../../models/schedulle_event/schedulle_event"
+import { SchedulleEvent } from "../../models/schedulle_event/schedulle_event"
 export class RequestSchedulle {
   id?: string
   @Type(()=>Client)
@@ -18,6 +18,7 @@ export class RequestSchedulle {
   
   constructor(public description:string = ''){}
 toCreate():CreateRequestSchedulleDto{
+
 return {}
 
 }

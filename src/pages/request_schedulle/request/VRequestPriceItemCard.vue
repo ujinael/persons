@@ -19,19 +19,28 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
-import { PriceItem } from '../../../stores/models';
+import { PriceItem, RequestNomenclatureItem } from '../../../stores/models';
 import VButton from '../../../components/ui-components/VButton.vue';
+import { useRequestSchedullesStore } from '../../../stores/modules/request_schedulles/useRequestSchedullesStore';
+import { storeToRefs } from 'pinia';
 
 const props = defineProps<
 {
  item:PriceItem   
 }>()
+const requestStore = useRequestSchedullesStore()
+const {requestSchedulle} = storeToRefs(requestStore)
 const count = ref(0)
 const decreaseCount = ()=>{
     count.value -= 1
 }
 const increaseCount = ()=>{
     count.value += 1
+    const newItem = new RequestNomenclatureItem(
+        props.item.ruble,props.item.penny,count.value
+    )
+    newItem.item = props.item.item!
+    requestSchedulle.value?.nomenclatureItems.push(newItem)
 }
 </script>
 <style scoped lang="scss">

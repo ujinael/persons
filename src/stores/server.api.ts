@@ -6,7 +6,6 @@ import {
 import { useRouter } from 'vue-router';
 import router from '../router';
 import { useGlobalStore } from './modules/global/useGlobalStore';
-// const config = require('config')
 type Endpoints =
   | 'update_phone'
   | 'add_phone'
@@ -71,8 +70,11 @@ export interface ApiError extends Error {
 
 export class Api {
   static shared = () => {
+    
     // return new Api(`${import.meta.env.VITE_VAPOR}`)
     return new Api(`http://localhost:5000`);
+
+    // return new Api(`http://192.168.1.70:5000`);
   };
   private rootPath: string;
   path: string = '';

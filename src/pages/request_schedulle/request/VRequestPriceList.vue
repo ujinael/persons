@@ -20,8 +20,9 @@ import VTabBar from '../../../components/ui-components/VTabBar.vue';
 import VTabBarItem from '../../../components/ui-components/VTabBarItem.vue';
 
 const store = usePricesStore()
+
 const {price} = storeToRefs(store)
-onMounted(()=>{
+onMounted(() => {
     store.fetchOnePrice('3fdfef39-703c-4541-8ca0-af4043812dae')
 })
 const type = ref<'services'|'products' >('services')

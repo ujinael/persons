@@ -4,7 +4,7 @@ import {CreateSchedulleEventDto} from '../../modules/schedulle_events/dto/create
 import {UpdateSchedulleEventDto} from '../../modules/schedulle_events/dto/update-schedulleEvent.dto'
 import { Client } from "../client/Client"
 import { EmployersPositions } from "../employers_positions/EmployersPositions"
-import { SchedulleInterval } from "../schedulle_interval/schedulle_interval"
+import { SchedulleInterval } from "../../models"
 export class SchedulleEvent extends SchedulleInterval{
   @Type(() => EmployersPositions)
   employerPosition?: EmployersPositions
